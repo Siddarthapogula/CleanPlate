@@ -1,0 +1,46 @@
+.headerContainer{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 0.3rem;
+}
+.logo{
+    width: 75px;
+    border-radius: 0.2rem;
+}
+.nav-items{
+    display: flex;
+    
+}
+.nav-items > li{
+    margin-right: 20px;
+    list-style-type: none;
+}
+.Filter-Container{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    padding: 10px;
+}
+.cardContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+.restuarantCard{
+    width: 210;
+    border: 1px solid black;
+    padding: 5px;
+    margin-left: 20px ;
+    margin-bottom: 20px ;
+
+}
+.restuarantCard:hover{
+    cursor: pointer; 
+}
+.resImg{
+    width: 210px;
+}
+.filterRated:hover{
+    cursor: pointer;
+}
