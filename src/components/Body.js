@@ -2,6 +2,7 @@ import restuarants from "./mockData";
 import RestuarantCard from "./RestuarantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 const Body = ()=>{
 
         const [showData, setShowData] = useState([]);
@@ -11,15 +12,16 @@ const Body = ()=>{
         const fetchRestuarants = async ()=>{
             const response = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
             const data = await response.json();
-            console.log(data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+            console.log(data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants[0]);
             setShowData(data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
             setRestuarant(data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         }
         useEffect(()=>{
             fetchRestuarants();
         },[]);
-
     return showData.length===0?<Shimmer/>:(
+
+        
         <div className="bodyContainer">
                 
                 <div className="Filter-Container">
@@ -51,7 +53,12 @@ const Body = ()=>{
             </div>
             <div className="cardContainer"> 
                 {
-                    showData.map(res=> <RestuarantCard resData = {res?.info} key= {res?.info?.id}/>)
+                    
+                    showData.map(res=>
+                        
+                    <Link className="resLink" to ={"/resturant/"+encodeURIComponent(res.info.name)+"/"+encodeURIComponent(res.info.cuisines)+"/"+encodeURIComponent(res.info.locality)+"/"+encodeURIComponent(res.info.avgRating)+"/"+encodeURIComponent(res.info.cloudinaryImageId)
+                }><RestuarantCard resData = {res?.info} key= {res?.info?.id}/></Link> 
+                    )
                 }
             </div>
         </div>

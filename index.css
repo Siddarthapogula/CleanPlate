@@ -1,3 +1,7 @@
+*{
+    font-family: 'Hedvig Letters Sans', sans-serif;
+    font-weight: 100;
+}
 .headerContainer{
     display: flex;
     justify-content: space-between;
@@ -13,9 +17,11 @@
     display: flex;
     
 }
-.nav-items > li{
+.link-tags{
     margin-right: 20px;
     list-style-type: none;
+    text-decoration: none;
+    color: black;
 }
 .Filter-Container{
     display: flex;
@@ -28,16 +34,32 @@
     flex-wrap: wrap;
 }
 .restuarantCard{
-    width: 210;
-    border: 1px solid black;
+    text-align: center;
+    width: 215px;
+    border: 1px solid #f0f0f0; 
     padding: 5px;
     margin-left: 20px ;
     margin-bottom: 20px ;
+    height: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    text-decoration: none;
 
 }
 .restuarantCard:hover{
-    cursor: pointer; 
+    cursor: pointer;
+    border: 1px solid #f0f0f0; /* Optional: Add a border to the div */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+.hoverBack:hover{
+    transition: 0.2s;
+    transform: scale(1.005);
+}
+.resLink{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
 .resImg{
     width: 210px;
 }
@@ -52,7 +74,7 @@
 .shimmer-card{
     margin-top: 10px;
     margin-left: 20px;
-    width: 210px;
+    width: 215px;
     height: 400px;
     background-color: #f0f0f0;
 }
@@ -66,4 +88,26 @@
 }
 .loginBtn:hover{
     cursor: pointer;
+}
+.container-detailed{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.detailsContainer >h2{
+    text-align: center;
+}
+.detailsContainer >h2{
+    text-align: center;
+}
+.detailImg{
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+.resName{
+    font-size: 24px;
+}
+.cuis{
+    font-size: 16px;
 }

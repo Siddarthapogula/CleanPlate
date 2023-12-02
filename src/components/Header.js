@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = ()=>{
 
@@ -10,10 +11,10 @@ const Header = ()=>{
             </div>
             <div className="nav">
                 <ul className="nav-items">
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Contact</li>
-                    <li>Cart</li>
+                    <Link to="/" className="link-tags"><li>Home</li></Link>
+                    <Link to="/about" className="link-tags"><li>About Us</li></Link>
+                    <Link to="/contact" className="link-tags"><li>Contact</li></Link>
+                    <Link to="cart" className="link-tags"><li>Cart</li></Link>
                     <button className="loginBtn" onClick={()=>{
                     log==="Login"?setLog("LogOut"):setLog("Login");
                 }}>{log}</button>
