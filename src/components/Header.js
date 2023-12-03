@@ -15,6 +15,8 @@ const Header = ()=>{
                     <Link to="/about" className="link-tags"><li>About Us</li></Link>
                     <Link to="/contact" className="link-tags"><li>Contact</li></Link>
                     <Link to="cart" className="link-tags"><li>Cart</li></Link>
+                    <Link to="/grocery" className="link-tags"><li>Grocery</li></Link>
+
                     <button className="loginBtn" onClick={()=>{
                     log==="Login"?setLog("LogOut"):setLog("Login");
                 }}>{log}</button>

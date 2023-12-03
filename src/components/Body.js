@@ -3,7 +3,10 @@ import RestuarantCard from "./RestuarantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useGetStatus from "./useGetStatus";
 const Body = ()=>{
+
+    const OnlineSatus = useGetStatus();
 
         const [showData, setShowData] = useState([]);
         const [restuarant, setRestuarant] = useState([]);
@@ -19,6 +22,14 @@ const Body = ()=>{
         useEffect(()=>{
             fetchRestuarants();
         },[]);
+
+        if(OnlineSatus === false)
+        {
+            return(
+                <h1>Check your internet</h1>
+            )
+
+        }
     return showData.length===0?<Shimmer/>:(
 
         
