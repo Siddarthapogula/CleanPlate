@@ -1,10 +1,14 @@
 import restuarants from "./mockData";
-import RestuarantCard from "./RestuarantCard";
-import { useEffect, useState } from "react";
+import RestuarantCard, {RestuarantWithLabel} from "./RestuarantCard";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useGetStatus from "./useGetStatus";
+import UserContext from "../UserContext";
+
 const Body = ()=>{
+
+    const {user, setUser} = useContext(UserContext);
 
     const OnlineSatus = useGetStatus();
 
@@ -15,7 +19,7 @@ const Body = ()=>{
         const fetchRestuarants = async ()=>{
             const response = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
             const data = await response.json();
-            console.log(data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants[0]);
+            // console.log(data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
             setShowData(data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
             setRestuarant(data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         }
@@ -30,29 +34,36 @@ const Body = ()=>{
             )
 
         }
-    return showData.length===0?<Shimmer/>:(
+
+        const LabelRestuarant = RestuarantWithLabel(RestuarantCard);    
+        // (showData.length===0)?<Shimmer/>:
+    return (
 
         
-        <div className="bodyContainer">
+        <div className="">
                 
-                <div className="Filter-Container">
+                <div className="flex justify-between">
                     <div className="search">
-                    <input  type="text" placeholder="Enter the Restuarant Name" className="searchBar" value={searchText}
+                    <input  type="text" placeholder="Enter the Restuarant Name" className=" m-4 p-2 bg-blue-200 rounded-xl border border-gray-400 " value={searchText}
                         onChange={(e)=>{
                             setSearctText(e.target.value);
                         }}
                     />
-                <button onClick={()=>{
+                <button className="mr-2 p-2 bg-blue-300 rounded-xl border border-gray-400" onClick={()=>{
                         const filteredData = restuarant.filter((res)=>{ 
                             return res?.info?.name?.toLowerCase().includes(searchText.toLowerCase());
                         })
                         setShowData(filteredData);
                 }}>
                     search</button>
+                    <input type="text"  value={user.name} onChange={e=>setUser({
+                        name:e.target.value,
+                        email:"text.mail.com"
+                    })} className=" bg-blue-100  p-2"/>
                     </div>
                     
-                <div className="filterRated">
-                    <button className="rateRestuarant"
+                <div className="">
+                    <button className="m-4 p-2 bg-blue-300 rounded-xl border border-gray-400"
                         onClick={()=>{
                                const topFiltered=  restuarant.filter((res)=>{
                                 return res?.info?.avgRating > 4;
@@ -62,13 +73,18 @@ const Body = ()=>{
                     >Filter Top Rated Restuarant</button>
                 </div>
             </div>
-            <div className="cardContainer"> 
+            <div className="flex flex-wrap "> 
                 {
                     
-                    showData.map(res=>
-                        
-                    <Link className="resLink" to ={"/resturant/"+encodeURIComponent(res.info.name)+"/"+encodeURIComponent(res.info.cuisines)+"/"+encodeURIComponent(res.info.locality)+"/"+encodeURIComponent(res.info.avgRating)+"/"+encodeURIComponent(res.info.cloudinaryImageId)
-                }><RestuarantCard resData = {res?.info} key= {res?.info?.id}/></Link> 
+                    showData.map(res=> 
+                    <Link className="cursor-default " to ={"/resturant/"+encodeURIComponent(res.info.name)+"/"+encodeURIComponent(res.info.cuisines)+"/"+encodeURIComponent(res.info.locality)+"/"+encodeURIComponent(res.info.avgRating)+"/"+encodeURIComponent(res.info.cloudinaryImageId)
+                }>
+                    {res.info.isOpen ? (
+                <LabelRestuarant resData={res.info} />
+                        ) : (
+              <RestuarantCard resData={res.info} />
+            )}
+                   </Link> 
                     )
                 }
             </div>

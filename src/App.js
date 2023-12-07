@@ -1,23 +1,43 @@
-import React,{lazy, Suspense} from "react";
+import React,{lazy, Suspense, useState} from "react";
 import  ReactDOM  from "react-dom/client";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Body from "./components/Body";
 import { createBrowserRouter, RouterProvider,Router, Outlet } from "react-router-dom";
 import Error from "./components/Error";
-import About  from "./components/About";
 import Contact from "./components/Contact";
 import Cart from "./components/Cart";
 import RestuarantDetails from "./components/RestuarantDetails";
 import Shimmer from "./components/Shimmer";
+import Accordian from "./components/mockAccordianData";
+import UserContext from "./UserContext";
+import { useContext ,useState} from "react";
 
+const About = lazy(()=>{
+    return import("./components/About");
+})
 const Grocery = lazy(()=>import('./Grocery'))
 const AppLayout = ()=>{
+    
+    const [user1, setUser] = useState({
+       
+            name:"siddarth",
+            email:"sid@mail.com"
+
+    })
+const {user} = useContext(UserContext);
+console.log(user);
+// console.log(user);
     return(
         <div>
+            <UserContext.Provider value={{
+             user:user1 ,
+             setUser:setUser
+     }}>
             <Header/>
             <Outlet/>
             <Footer/>
+             </UserContext.Provider> 
         </div>
     )
 }
@@ -34,7 +54,7 @@ const appRouter = createBrowserRouter([
             },
             {
                 path:"/about",
-                element:<About/>
+                element:<Suspense fallback={<Shimmer/>}><About/></Suspense>
             },
             {
                 path:"/contact",
