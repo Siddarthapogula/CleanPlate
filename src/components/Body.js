@@ -44,7 +44,7 @@ const Body = ()=>{
                 
                 <div className="flex justify-between">
                     <div className="search">
-                    <input  type="text" placeholder="Enter the Restuarant Name" className=" m-4 p-2 bg-blue-200 rounded-xl border border-gray-400 " value={searchText}
+                    <input data-testid="searchInput"  type="text" placeholder="Enter the Restuarant Name" className=" m-4 p-2 bg-blue-200 rounded-xl border border-gray-400 " value={searchText}
                         onChange={(e)=>{
                             setSearctText(e.target.value);
                         }}
@@ -56,10 +56,10 @@ const Body = ()=>{
                         setShowData(filteredData);
                 }}>
                     search</button>
-                    <input type="text"  value={user.name} onChange={e=>setUser({
+                    {/* <input type="text"  value={user.name} onChange={e=>setUser({
                         name:e.target.value,
                         email:"text.mail.com"
-                    })} className=" bg-blue-100  p-2"/>
+                    })} className=" bg-blue-100  p-2"/> */}
                     </div>
                     
                 <div className="">
@@ -76,13 +76,13 @@ const Body = ()=>{
             <div className="flex flex-wrap "> 
                 {
                     
-                    showData.map(res=> 
-                    <Link className="cursor-default " to ={"/resturant/"+encodeURIComponent(res.info.name)+"/"+encodeURIComponent(res.info.cuisines)+"/"+encodeURIComponent(res.info.locality)+"/"+encodeURIComponent(res.info.avgRating)+"/"+encodeURIComponent(res.info.cloudinaryImageId)
+                    showData?.map(res=> 
+                    <Link  data-textid= "card" className="cursor-default " to ={"/resturant/"+encodeURIComponent(res.info.name)+"/"+encodeURIComponent(res.info.cuisines)+"/"+encodeURIComponent(res.info.locality)+"/"+encodeURIComponent(res.info.avgRating)+"/"+encodeURIComponent(res.info.cloudinaryImageId)
                 }>
                     {res.info.isOpen ? (
-                <LabelRestuarant resData={res.info} />
+                <LabelRestuarant  data-textid= "card" resData={res.info} />
                         ) : (
-              <RestuarantCard resData={res.info} />
+              <RestuarantCard   resData={res.info} />
             )}
                    </Link> 
                     )

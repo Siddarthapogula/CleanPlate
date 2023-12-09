@@ -7,7 +7,9 @@ const RestuarantCard = (props)=>{
     
 
     const {resData } = props;
-    const {cloudinaryImageId, avgRating, name, areaName, cuisines,totalRatingsString} = resData;
+    // console.log(resData);
+    // const {cloudinaryImageId, avgRating, name, areaName, cuisines,totalRatingsString} = resData;
+    const { cloudinaryImageId, avgRating, name, areaName, cuisines, totalRatingsString } = resData || {};
 
     return(
         
@@ -15,7 +17,7 @@ const RestuarantCard = (props)=>{
         <div className="w-[225px] rounded-lg  p-2 text-center ">
                 <img className=" w-[225px]  rounded-lg " src= {IMG_URL+cloudinaryImageId}/>
                 <h1 className=" font-semibold text-xl">{name}</h1>
-                <h2 className=" text-md">{cuisines.slice(0,4).join(" , ")}</h2>
+                <h2 className=" text-md">{cuisines?.slice(0,4).join(" , ")}</h2>
                 <h3 className="text-sm">{areaName}</h3>
                 <h5 className="text-sm">{totalRatingsString} {avgRating} ⭐</h5>
                 <h5 className="text-sm">{user.name} </h5>

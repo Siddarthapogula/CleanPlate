@@ -12,6 +12,8 @@ import Shimmer from "./components/Shimmer";
 import Accordian from "./components/mockAccordianData";
 import UserContext from "./UserContext";
 import { useContext ,useState} from "react";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 const About = lazy(()=>{
     return import("./components/About");
@@ -26,18 +28,18 @@ const AppLayout = ()=>{
 
     })
 const {user} = useContext(UserContext);
-console.log(user);
 // console.log(user);
     return(
         <div>
-            <UserContext.Provider value={{
-             user:user1 ,
-             setUser:setUser
-     }}>
-            <Header/>
-            <Outlet/>
-            <Footer/>
-             </UserContext.Provider> 
+            <Provider store={appStore}>
+                <UserContext.Provider value={{
+                    user:user1 ,
+                    setUser:setUser}}>
+                <Header/>
+                <Outlet/>
+                <Footer/>
+                </UserContext.Provider> 
+             </Provider>
         </div>
     )
 }
